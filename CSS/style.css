@@ -41,7 +41,7 @@ input:hover {
 
 /* Background image for Main Section */
 main {
-  background: url("../image/background.jpg") no-repeat center center/cover;
+  background: no-repeat center center/cover;
   min-height: 80vh;
   display: flex;
   flex-direction: column;

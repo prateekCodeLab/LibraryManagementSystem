@@ -6,7 +6,7 @@
     <title>Library Management System</title>
     <link rel="stylesheet" href="CSS/style.css" />
   </head>
-  <body>
+  <body style="background-image: url('image/background.jpg');">
     <header>
       <h1>IndiLibrary LMS</h1>
       <input type="text" id="searchBox" placeholder="Search for books" />
