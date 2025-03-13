@@ -1,7 +1,9 @@
 // Search Functionality
+document.addEventListener("DOMContentLoaded", function() {
 document.getElementById("searchBox").addEventListener("keyup", function () {
     let filter = this.value.toLowerCase().trim(); // Get the search query
-    let books = document.querySelectorAll(".book"); // Get all book cards
+    let books = document.querySelectorAll("book"); // Get all book cards
+    console.log(books);
     let isAnyBookVisible = false;
 
     books.forEach(function (book) {
@@ -27,7 +29,7 @@ document.getElementById("searchBox").addEventListener("keyup", function () {
             book.style.display = "block";
         });
     }
-});
+})});
 
 
 

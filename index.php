@@ -9,6 +9,7 @@ require 'db_connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
     <link rel="stylesheet" href="CSS/style.css">
+    
 </head>
 <body style="background-image: url('image/background.jpg');">
     <header>
@@ -41,4 +42,5 @@ require 'db_connection.php';
         </div>
     </main>
 </body>
+<script type="text/javascript" src="script.js"></script>
 </html>
