@@ -3,16 +3,22 @@ require 'db_connection.php';
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM books WHERE id = $id";
-    $result = $conn->query($sql);
+
+    // Use prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM books WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $book = $result->fetch_assoc();
     } else {
-        die("Book not found.");
+        echo "<p style='color: red; text-align: center;'>Book not found.</p>";
+        exit();
     }
 } else {
-    die("Invalid book ID.");
+    echo "<p style='color: red; text-align: center;'>Invalid book ID.</p>";
+    exit();
 }
 ?>
 
@@ -24,14 +30,14 @@ if (isset($_GET['id'])) {
     <title>Book Details</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-<body>
+<body style="background-image: url('image/background.jpg');">
     <div class="book-detail-container">
-        <img src="<?php echo $book['book_image']; ?>" alt="<?php echo $book['book_name']; ?>">
+        <img src="<?php echo htmlspecialchars($book['book_image']); ?>" alt="<?php echo htmlspecialchars($book['book_name']); ?>">
         <div class="book-detail-content">
-            <h2><?php echo $book['book_name']; ?></h2>
-            <p><strong>Author:</strong> <?php echo $book['author_name']; ?></p>
-            <p><strong>Publish Year:</strong> <?php echo $book['publish_year']; ?></p>
-            <p><?php echo $book['book_description']; ?></p>
+            <h2><?php echo htmlspecialchars($book['book_name']); ?></h2>
+            <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+            <p><strong>Publish Year:</strong> <?php echo htmlspecialchars($book['publish_year']); ?></p>
+            <p><?php echo htmlspecialchars($book['book_description']); ?></p>
             <a href="index.php" class="btn-back">Back to Home</a>
         </div>
     </div>

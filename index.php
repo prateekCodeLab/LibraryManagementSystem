@@ -9,7 +9,6 @@ require 'db_connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
     <link rel="stylesheet" href="CSS/style.css">
-    
 </head>
 <body style="background-image: url('image/background.jpg');">
     <header>
@@ -26,13 +25,14 @@ require 'db_connection.php';
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    // Output data of each row
                     while ($row = $result->fetch_assoc()) {
-                        echo "<a href='book_details.php?id=" . $row["id"] . "' class='book'>";
-                        echo "<img src='" . $row["book_image"] . "' alt='" . $row["book_name"] . "' class='book-image'>";
-                        echo "<h3>" . $row["book_name"] . "</h3>";
-                        echo "<p>" . $row["author_name"] . "</p>";
-                        echo "</a>";
+                        ?>
+                        <a href="book_details.php?id=<?php echo $row['id']; ?>" class="book">
+                            <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="<?php echo htmlspecialchars($row['book_name']); ?>" class="book-image">
+                            <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
+                            <p><?php echo htmlspecialchars($row['author_name']); ?></p>
+                        </a>
+                        <?php
                     }
                 } else {
                     echo "<p>No books available.</p>";
@@ -41,6 +41,7 @@ require 'db_connection.php';
             </div>
         </div>
     </main>
+
+    <script src="script.js"></script> <!-- Ensure JavaScript is linked -->
 </body>
-<script type="text/javascript" src="script.js"></script>
 </html>
