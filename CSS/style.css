@@ -112,7 +112,7 @@ h2 {
 
 .book-detail-content h2 {
   margin: 10px 0;
-  color: #2c3e50;
+  color: White;
 }
 
 .book-detail-content p {
@@ -133,4 +133,144 @@ h2 {
 
 .btn-back:hover {
   background: #c0392b;
+}
+
+/* Add Book Modal */
+/* Modal Background */
+#addBookModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 450px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -55%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Modal Header */
+#addBookModal h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: White;
+}
+
+/* Modal Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #e74c3c;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #c0392b;
+}
+
+/* Input Fields */
+#addBookModal input,
+#addBookModal textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+#addBookModal input:focus,
+#addBookModal textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.4);
+  outline: none;
+}
+
+/* File Input Styling */
+#addBookModal input[type="file"] {
+  border: none;
+  padding: 5px;
+}
+
+/* Submit Button */
+#addBookModal button[type="submit"] {
+  background: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#addBookModal button[type="submit"]:hover {
+  background: #218838;
+}
+
+
+/* Delete Button */
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Ensure book link covers full book card */
+.book-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Prevent the image, title, and text from blocking the link */
+.book img, .book h3, .book p {
+  pointer-events: none;
+}
+
+/* Style for Add Book Button */
+#addBookBtn {
+  background: #28a745;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+#addBookBtn:hover {
+  background: #218838;
 }

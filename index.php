@@ -14,6 +14,7 @@ require 'db_connection.php';
     <header>
         <h1>IndiLibrary LMS</h1>
         <input type="text" id="searchBox" placeholder="Search for books">
+        <button id="addBookBtn">Add New Book</button>
     </header>
     <main>
         <div class="content-box">
@@ -27,11 +28,20 @@ require 'db_connection.php';
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <a href="book_details.php?id=<?php echo $row['id']; ?>" class="book">
+                        <div class="book">
+                            <!-- Book Details Clickable -->
+                            <a href="book_details.php?id=<?php echo $row['id']; ?>" class="book-link">
                             <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="<?php echo htmlspecialchars($row['book_name']); ?>" class="book-image">
                             <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
                             <p><?php echo htmlspecialchars($row['author_name']); ?></p>
-                        </a>
+                            </a>
+
+                            <!-- Delete Button -->
+                            <form action="delete_book.php" method="POST">
+                                <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
+                            </form>
+                         </div>
                         <?php
                     }
                 } else {
@@ -41,6 +51,28 @@ require 'db_connection.php';
             </div>
         </div>
     </main>
+
+    <!-- Modal Form for Adding New Book -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add a New Book</h2>
+            <form action="add_book.php" method="POST" enctype="multipart/form-data">
+                <input type="text" name="book_name" placeholder="Book Name" required>
+                <input type="text" name="author_name" placeholder="Author Name" required>
+                <input type="number" name="publish_year" placeholder="Publish Year" required>
+                <textarea name="book_description" placeholder="Book Description" required></textarea>
+                <input type="file" name="book_image" accept="image/*" required>
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("addBookModal").style.display = "none";
+    });
+</script>
 
     <script src="script.js"></script> <!-- Ensure JavaScript is linked -->
 </body>

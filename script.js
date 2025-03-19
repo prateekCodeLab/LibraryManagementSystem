@@ -45,3 +45,24 @@ document.addEventListener("DOMContentLoaded", function() {
 function goToBookDetail(bookId) {
     window.location.href = `book_details.php?id=${bookId}`;
 }
+
+// Handles modal open/close)
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("addBookModal");
+    const openModal = document.getElementById("addBookBtn");
+    const closeModal = document.querySelector(".close");
+
+    openModal.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    closeModal.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
