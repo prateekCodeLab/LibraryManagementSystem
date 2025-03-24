@@ -229,14 +229,47 @@ h2 {
   background: #218838;
 }
 
+/* Buttons Container */
+.book-actions {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.book-actions a,
+.book-actions button {
+  width: 80px;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* Edit Button */
+.edit-btn {
+  background: #f39c12;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.edit-btn:hover {
+  background: #e67e22;
+}
 
 /* Delete Button */
+
 .delete-btn {
   background: #e74c3c;
   color: white;
   border: none;
   padding: 8px 12px;
-  margin-top: 10px;
   cursor: pointer;
   border-radius: 5px;
   transition: 0.3s;
@@ -273,4 +306,106 @@ h2 {
 
 #addBookBtn:hover {
   background: #218838;
+}
+
+
+/* Edit Book Modal Styling */
+#editBookModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 450px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -55%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Edit Book Header */
+#editBookModal h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: White;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #e74c3c;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #c0392b;
+}
+
+/* Form Input Fields */
+#editBookModal input,
+#editBookModal textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+#editBookModal input:focus,
+#editBookModal textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.4);
+  outline: none;
+}
+
+/* File Input */
+#editBookModal input[type="file"] {
+  border: none;
+  padding: 5px;
+}
+
+/* Submit Button */
+#editBookModal button[type="submit"] {
+  background: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#editBookModal button[type="submit"]:hover {
+  background: #218838;
+}
+
+/* Current Image Preview */
+#editBookModal img {
+  width: 120px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }

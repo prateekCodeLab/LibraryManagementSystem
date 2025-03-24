@@ -36,11 +36,16 @@ require 'db_connection.php';
                             <p><?php echo htmlspecialchars($row['author_name']); ?></p>
                             </a>
 
-                            <!-- Delete Button -->
-                            <form action="delete_book.php" method="POST">
-                                <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
-                            </form>
+                            <!-- Edit Button -->
+                            <div class="book-actions">
+                                <a href="edit_book.php?id=<?php echo $row['id']; ?>" class="edit-btn" style="width: auto; padding: 8px 10px;">Edit</a>
+
+                                <!-- Delete Button -->
+                                <form action="delete_book.php" method="POST" class="delete-form">
+                                    <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
+                                </form>
+                            </div>
                          </div>
                         <?php
                     }
