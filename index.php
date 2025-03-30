@@ -1,5 +1,11 @@
 <?php
 require 'db_connection.php';
+
+// Count only available books (books that are NOT in borrowed_books OR have been returned)
+$query = "SELECT COUNT(*) AS total_books FROM books 
+          WHERE id NOT IN (SELECT book_id FROM borrowed_books WHERE return_date IS NULL)";
+$result = $conn->query($query);
+$total_books = ($result) ? $result->fetch_assoc()['total_books'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +22,18 @@ require 'db_connection.php';
         <input type="text" id="searchBox" placeholder="Search for books">
         <button id="addBookBtn">Add New Book</button>
     </header>
+
+    <!-- Total Books Count + Borrow & Return Buttons -->
+    <div class="dashboard">
+        <a href="borrow_book.php" class="borrow-btn">Borrow Book</a>
+        <div class="book-count">
+            <h2>Total Books Available: <?php echo $total_books; ?></h2>
+        </div>
+        <a href="return_book.php" class="return-btn">Return Book</a>
+    </div>
+
     <main>
         <div class="content-box">
-            <h2>Available Books</h2>
             <div class="book-list" id="bookList">
                 <?php
                 // Fetch books from the database
@@ -29,24 +44,19 @@ require 'db_connection.php';
                     while ($row = $result->fetch_assoc()) {
                         ?>
                         <div class="book">
-                            <!-- Book Details Clickable -->
                             <a href="book_details.php?id=<?php echo $row['id']; ?>" class="book-link">
-                            <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="<?php echo htmlspecialchars($row['book_name']); ?>" class="book-image">
-                            <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
-                            <p><?php echo htmlspecialchars($row['author_name']); ?></p>
+                                <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="<?php echo htmlspecialchars($row['book_name']); ?>" class="book-image">
+                                <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
+                                <p><?php echo htmlspecialchars($row['author_name']); ?></p>
                             </a>
-
-                            <!-- Edit Button -->
                             <div class="book-actions">
-                                <a href="edit_book.php?id=<?php echo $row['id']; ?>" class="edit-btn" style="width: auto; padding: 8px 10px;">Edit</a>
-
-                                <!-- Delete Button -->
+                                <a href="edit_book.php?id=<?php echo $row['id']; ?>" class="edit-btn">Edit</a>
                                 <form action="delete_book.php" method="POST" class="delete-form">
                                     <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
                                     <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
                                 </form>
                             </div>
-                         </div>
+                        </div>
                         <?php
                     }
                 } else {
@@ -73,12 +83,6 @@ require 'db_connection.php';
         </div>
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("addBookModal").style.display = "none";
-    });
-</script>
-
-    <script src="script.js"></script> <!-- Ensure JavaScript is linked -->
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,23 +1,24 @@
 <?php
 require 'db_connection.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if (isset($_GET['id'])) {
-    $book_id = intval($_GET['id']);
-    
-    $sql = "SELECT * FROM books WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+    $book_id = $_GET['id'];
+    $query = "SELECT * FROM books WHERE id = ?";
+    $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $book_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $book = $result->fetch_assoc();
-    } else {
-        die("Book not found!");
+    $book = $result->fetch_assoc();
+
+    if (!$book) {
+        echo "Book not found!";
+        exit();
     }
-    $stmt->close();
 } else {
-    die("Invalid request!");
+    echo "Invalid book ID!";
+    exit();
 }
 ?>
 
@@ -30,41 +31,28 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-    <!-- Edit Book Modal -->
-    <div id="editBookModal" class="modal" style="display: block;">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Edit Book Details</h2>
-            <form action="update_book.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
+    <div class="edit-container">
+        <h2>✏️ Edit Book</h2>
+        <form action="update_book.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
 
-                <label>Book Name:</label>
-                <input type="text" name="book_name" value="<?php echo htmlspecialchars($book['book_name']); ?>" required>
+            <label>Book Name</label>
+            <input type="text" name="book_name" value="<?php echo htmlspecialchars($book['book_name']); ?>" required>
 
-                <label>Author Name:</label>
-                <input type="text" name="author_name" value="<?php echo htmlspecialchars($book['author_name']); ?>" required>
+            <label>Author Name</label>
+            <input type="text" name="author_name" value="<?php echo htmlspecialchars($book['author_name']); ?>" required>
 
-                <label>Publish Year:</label>
-                <input type="number" name="publish_year" value="<?php echo htmlspecialchars($book['publish_year']); ?>" required>
+            <label>Publish Year</label>
+            <input type="number" name="publish_year" value="<?php echo htmlspecialchars($book['publish_year']); ?>" required>
 
-                <label>Book Description:</label>
-                <textarea name="book_description" required><?php echo htmlspecialchars($book['book_description']); ?></textarea>
+            <label>Current Cover</label><br>
+            <img src="<?php echo htmlspecialchars($book['book_image']); ?>" alt="Book Cover" width="100"><br>
 
-                <label>Current Image:</label>
-                <img src="<?php echo htmlspecialchars($book['book_image']); ?>" width="150px">
+            <label>Upload New Cover</label>
+            <input type="file" name="book_image" accept="image/*">
 
-                <label>Change Image (Optional):</label>
-                <input type="file" name="book_image" accept="image/*">
-
-                <button type="submit">Update Book</button>
-            </form>
-        </div>
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
-
-    <script>
-    function closeModal() {
-        window.location.href = "index.php";
-    }
-    </script>
 </body>
 </html>

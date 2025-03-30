@@ -409,3 +409,159 @@ h2 {
   border-radius: 5px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
+
+/* Dashboard Section */
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  margin: 20px;
+}
+
+/* Book Count */
+.book-count {
+  background: transparent;
+  color: #ffffff;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Borrow & Return Buttons */
+.borrow-btn, .return-btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+}
+
+.borrow-btn {
+  background: #049bd7;
+}
+
+.return-btn {
+  background: #ffc107;
+}
+
+.borrow-btn:hover, .return-btn:hover {
+  opacity: 0.8;
+}
+
+/* Modal Improvements */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #1e1e2f;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content input, .modal-content textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: #333;
+  color: white;
+}
+
+.modal-content button {
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  opacity: 0.8;
+}
+
+/* Borrow & Return Pages */
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container h2 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #dc3545;
+  color: white;
+  padding: 8px 15px;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #c82333;
+}
